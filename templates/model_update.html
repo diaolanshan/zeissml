@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <!-- Site Properities -->
+    <title>Zeiss Mechine Learning</title>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/semantic.css">
+</head>
+<body>
+<form id="model_update" class="ui fluid form segment" action="/learning/model_update" method="post">
+    <div class="ui two column stackable grid container">
+        <div class="column">
+            <div class="field">
+                <label class="">年龄:</label>
+                <div class="ui labeled icon input">
+                    <input type="text" name="age" placeholder="">
+                    <div class="ui basic label">岁</div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="">性别:</label>
+                <select name="gender" class="ui dropdown">
+                    <option value="">性别</option>
+                    <option value="1">男</option>
+                    <option value="0">女</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="inline field">
+            <button type="submit" class="ui fluid large teal submit button">提交</button >
+        </div>
+    </div>
+</form>
+<script src="../static/js/jquery-3.1.1.min.js"></script>
+<script src="../static/js/semantic.js"></script>
+<script>
+        $('.dropdown').dropdown();
+</script>
+</body>
+
+</html>
