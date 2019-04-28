@@ -1,26 +1,21 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <!-- Standard Meta -->
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <!-- Site Properities -->
-    <title>Zeiss Mechine Learning</title>
-
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="../static/css/form.min.css">-->
     <link rel="stylesheet" type="text/css" href="../static/css/semantic.css">
 </head>
 <body>
-<form id="model_update" class="ui fluid form segment" action="/learning/model_update" method="post">
+<form class="ui fluid form segment error error" action="./model_update" method="post">
+    {% for message in get_flashed_messages() %}
+            <font color="red">{{ message }}</font>
+        {% endfor %}
     <div class="ui two column stackable grid container">
         <div class="column">
-            <div class="field">
-                <label class="">年龄:</label>
-                <div class="ui labeled icon input">
-                    <input type="text" name="age" placeholder="">
-                    <div class="ui basic label">岁</div>
-                </div>
+            <div class="field column">
+                <label>年龄:</label>
+                <input name="age" type="text" value="">
             </div>
         </div>
         <div class="column">
@@ -30,20 +25,114 @@
                     <option value="">性别</option>
                     <option value="1">男</option>
                     <option value="0">女</option>
+                    <option value="0">Gay</option>
+                    <option value="0">Lesbian</option>
                 </select>
             </div>
         </div>
 
-        <div class="inline field">
-            <button type="submit" class="ui fluid large teal submit button">提交</button >
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>学历:</label>
+            <select class="ui dropdown" name="education">
+                <option value="4">博士</option>
+                <option value="3">硕士</option>
+                <option value="2">本科</option>
+                <option value="1">高中</option>
+                <option value="0">初中及以下</option>
+            </select>
         </div>
+        <div class="field column">
+            <label>对Zeiss的了解程度:</label>
+            <select class="ui dropdown" name="education">
+                <option value="2">高</option>
+                <option value="1">中</option>
+                <option value="0">低</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>是否有医保:</label>
+            <select class="ui dropdown" name="">
+                <option value="0">否</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+        <div class="field column">
+            <label>手术医院资质:</label>
+            <select class="ui dropdown" name="">
+                <option value="0">一甲</option>
+                <option value="1">二甲</option>
+                <option value="1">三甲</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>是否有认识的人有成功手术案例:</label>
+            <select class="ui dropdown" name="">
+                <option value="0">没有</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+        <div class="field column">
+            <label>是否近视:</label>
+            <select class="ui dropdown" name="">
+                <option value="0">近视</option>
+                <option value="1">不近视</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>家庭年收入（万）:</label>
+            <input name="incoming" type="text" value="">
+        </div>
+        <div class="field column">
+            <label>是否酗烟酒:</label>
+            <select class="ui dropdown" name="">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="one fields ui column doubling stackable grid container">
+        <button type="submit" class="ui violet inverted button" style="width: 100%" value="Submit">Submit</button>
     </div>
 </form>
 <script src="../static/js/jquery-3.1.1.min.js"></script>
+<script src="../static/js/form.min.js"></script>
 <script src="../static/js/semantic.js"></script>
-<script>
-        $('.dropdown').dropdown();
+<script type="text/javascript">
+    $('.dropdown').dropdown();
+    $(document).ready(function() {
+        $('.ui.form').form({
+            inline: true,
+            on: 'blur',
+            fields: {
+              age: {
+                identifier  : 'age',
+                rules: [
+                  {
+                    type   : 'integer[1..120]',
+                    prompt : '请输入一个整数'
+                  }
+                ]
+              },
+              incoming: {
+                identifier  : 'incoming',
+                rules: [
+                  {
+                    type   : 'empty',
+                    prompt : '请输入一个整数'
+                  }
+                ]
+              }
+            }
+          })
+     });
 </script>
 </body>
-
 </html>

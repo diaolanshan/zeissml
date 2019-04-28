@@ -14941,8 +14941,8 @@ a.ui.label {
   padding: 0em;
   text-align: center;
   border-color: #E8E8E8;
-  width: 4em;
-  height: 4em;
+  width: 3em;
+  height: 3em;
   z-index: 1;
   -webkit-transition: border-color 0.1s ease;
   transition: border-color 0.1s ease;
@@ -14964,8 +14964,8 @@ a.ui.label {
   height: 0em;
   background-color: transparent !important;
   border-top: 0em solid transparent;
-  border-right: 4em solid transparent;
-  border-bottom: 4em solid transparent;
+  border-right: 3em solid transparent;
+  border-bottom: 3em solid transparent;
   border-left: 0em solid transparent;
   border-right-color: inherit;
   -webkit-transition: border-color 0.1s ease;
@@ -14975,8 +14975,8 @@ a.ui.label {
 .ui.corner.label .icon {
   cursor: default;
   position: relative;
-  top: 0.64285714em;
-  left: 0.78571429em;
+  top: 0.24285714em;
+  left: 0.58571429em;
   font-size: 1.14285714em;
   margin: 0em;
 }

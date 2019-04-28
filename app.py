@@ -10,7 +10,8 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'oiwihjmcwe02f2'
 app.register_blueprint(zeisslearning, url_prefix='/learning')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@szhpc6287:3306/zeissml'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root1234@localhost:3306/zeissml'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///zeissml.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy()
 db.init_app(app)
@@ -21,7 +22,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    from zeiss_models import Users
+    from models.models import Users
     return Users.query.get(user_id)
 
 
@@ -44,17 +45,17 @@ def login():
         password = request.form['password']
 
         next_url = request.args.get("next")
-        from zeiss_models import Users
+        from models.models import Users
         user = Users.query.filter_by(username=username).first()
 
         if user is not None and user.password == password.strip():
             # set login user
             flask_login.login_user(user)
-            return redirect(next_url or url_for('index'))
+            return redirect(next_url or url_for('learning.prediction'))
         else:
             flash('用户名或者密码错误')
 
-    return render_template('login.html')
+    return render_template('prediction.html')
 
 
 @app.route('/logout')

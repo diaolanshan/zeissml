@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properities -->
-  <title>Zeiss Mechine Learning</title>
+  <title>Zeiss Machine Learning</title>
 
   <link rel="stylesheet" type="text/css" href="../static/css/semantic.css">
   <script src="../static/js/jquery-3.1.1.min.js"></script>
@@ -33,8 +33,8 @@
                  prompt : '请输入密码'
                 },
                 {
-                  type   : 'length[6]',
-                  prompt : '密码应该是大于六位的'
+                  type   : 'length[5]',
+                  prompt : '密码应该是大于五位的'
                 }]
             }
           }
@@ -80,7 +80,15 @@
         {% for message in get_flashed_messages() %}
             <font color="red">{{ message }}</font>
         {% endfor %}
-        <form id="login" class="ui fluid form segment" action="/login" method="post">
+        <div style="width:100%;padding-top:30px;text-align:center">
+        <h2 class="ui teal image header">
+          <img src="../static/img/bigdata.png" class="image">
+          <div class="content">
+            Login to your account
+          </div>
+        </h2>
+        </div>
+        <form id="login" class="ui fluid form segment " action="/login" method="post">
             <div class="field">
                 <label class="">用户名</label>
                 <div class="ui left icon input">

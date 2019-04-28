@@ -19,7 +19,20 @@ def prediction():
     if request.method == 'GET':
         return render_template('/prediction.html')
     else:
-        pass
+        age = request.form['age']
+        gender = request.form['gender']
+        education = request.form['education']
+        knowhow = request.form['knowhow']
+        yibao = request.form['yibao']
+        hospital_level = request.form['hospital_level']
+        experience = request.form['experience']
+        jinshi = request.form['jinshi']
+        incoming = request.form['incoming']
+        drink_smoke = request.form['drink_smoke']
+
+        result = 82
+
+        return render_template('/prediction_result.html', result = result)
 
 
 @learning.route('/index', methods=['GET'])

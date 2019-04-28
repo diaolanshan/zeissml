@@ -1,10 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Hello Prediction
-</body>
-</html>
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block title %}数据分析{% endblock %}
+{% block body %}
+<form class="ui fluid form segment" action="./prediction" method="post">
+    <div class="ui two column stackable grid container">
+        <div class="column">
+            <div class="field column">
+                <label>年龄:</label>
+                <input name="age" type="text" value="">
+            </div>
+        </div>
+        <div class="column">
+            <div class="field">
+                <label class="">性别:</label>
+                <select name="gender" class="ui dropdown">
+                    <option value="">性别</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+    </div>
+
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>学历:</label>
+            <select class="ui dropdown" name="education">
+                <option value="4">博士</option>
+                <option value="3">硕士</option>
+                <option value="2">本科</option>
+                <option value="1">高中</option>
+                <option value="0">初中及以下</option>
+            </select>
+        </div>
+        <div class="field column">
+            <label>对Zeiss的了解程度:</label>
+            <select class="ui dropdown" name="knowhow">
+                <option value="2">高</option>
+                <option value="1">中</option>
+                <option value="0">低</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>是否有医保:</label>
+            <select class="ui dropdown" name="yibao">
+                <option value="0">否</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+        <div class="field column">
+            <label>手术医院资质:</label>
+            <select class="ui dropdown" name="hospital_level">
+                <option value="0">一甲</option>
+                <option value="1">二甲</option>
+                <option value="1">三甲</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>是否有认识的人有成功手术案例:</label>
+            <select class="ui dropdown" name="experience">
+                <option value="0">没有</option>
+                <option value="1">有</option>
+            </select>
+        </div>
+        <div class="field column">
+            <label>是否近视:</label>
+            <select class="ui dropdown" name="jinshi">
+                <option value="0">近视</option>
+                <option value="1">不近视</option>
+            </select>
+        </div>
+    </div>
+    <div class="two fields ui two column doubling stackable grid container">
+        <div class="field column">
+            <label>家庭年收入（万）:</label>
+            <input name="incoming" type="text">
+        </div>
+        <div class="field column">
+            <label>是否酗烟酒:</label>
+            <select class="ui dropdown" name="drink_smoke">
+                <option value="1">是</option>
+                <option value="0">否</option>
+            </select>
+        </div>
+    </div>
+    <div class="one fields ui column doubling stackable grid container">
+    <button type="submit" class="ui violet inverted button" style="width: 100%" value="Submit">Submit</button>
+    </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $('.dropdown').dropdown();
+    $('.ui.form')
+      .form({
+        inline: true,
+        on: 'blur',
+        fields: {
+          integer: {
+            identifier  : 'age',
+            rules: [
+              {
+                type   : 'integer[1..120]',
+                prompt : 'Please enter your age'
+              }
+            ]
+          },
+          incoming: {
+            identifier  : 'incoming',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your yearly in-coming'
+              }
+            ]
+          },
+          gender: {
+            identifier  : 'gender',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your gender'
+              }
+            ]
+          }
+        }
+      })
+</script>
+{% endblock %}

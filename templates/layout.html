@@ -1,0 +1,47 @@
+<!doctype html>
+{% block head %}
+<title>{% block title %}Welcome{% endblock %}</title>
+<meta charset=utf-8>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/semantic.css') }}">
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/zeissml.css') }}">
+<!--<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">-->
+<script type="text/javascript" src="../static/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="../static/js/circles.min.js"></script>
+<script type="text/javascript" src="../static/js/semantic.js"></script>
+{% endblock %}
+<div class=box>
+  <!--{% block body_title %}-->
+    <!--<h1><span>{{ self.title() }}</span></h1>-->
+  {% endblock %}
+   <div class="ui borderless main menu fixed" style="position: fixed; top: 0px; left: auto; z-index: 10;">
+    <div class="ui text container">
+      <div class="header item">
+        <img class="logo" src="../static/img/bigdata.png" style="width: 3em;">
+        卡尔蔡司数据分析平台
+      </div>
+      <a href="./prediction" class="item">数据分析</a>
+      <a href="#" class="item">数据录入</a>
+      <!--<a href="#" class="ui right floated dropdown item">
+        Dropdown <i class="dropdown icon"></i>
+        <div class="menu">
+          <div class="item">Link Item</div>
+          <div class="item">Link Item</div>
+          <div class="divider"></div>
+          <div class="header">Header Item</div>
+          <div class="item">
+            <i class="dropdown icon"></i>
+            Sub Menu
+            <div class="menu">
+              <div class="item">Link Item</div>
+              <div class="item">Link Item</div>
+            </div>
+          </div>
+          <div class="item">Link Item</div>
+        </div>
+      </a>-->
+    </div>
+  </div>
+  <div style="padding-top:60px">
+  {% block body %}{% endblock %}
+  </div>
+</div>
