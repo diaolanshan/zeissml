@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block title %}分析结果{% endblock %}
+
+{% block body %}
+  <div class="ui one column stackable grid container" style="text-align:center">
+    <div class="circle column" style="padding-top:60px" id="prediction_result"></div>
+      <div class="column" style="padding-top:10px;font-size: 17px;">
+          根据你的输入，该客户有<font style="color:#79be9b;font-size: 30px;padding: 5px;"> {{result}}% </font>的机会会成为我们的最终客户。
+      </div>
+  </div>
+  <script src="../static/js/circles.min.js"></script>
+  <script type="text/javascript">
+    var myCircle = Circles.create({
+          id:                  'prediction_result',
+          radius:              160,
+          value:               {{result}},
+          maxValue:            100,
+          width:               10,
+          text:                function(value){return value + '%';},
+          colors:              ['#305556', '#79be9b'],
+          duration:            400,
+          wrpClass:            'circles-wrp',
+          textClass:           'circles-text',
+          valueStrokeClass:    'circles-valueStroke',
+          maxValueStrokeClass: 'circles-maxValueStroke',
+          styleWrapper:        true,
+          styleText:           true
+        });
+</script>
+{% endblock %}
