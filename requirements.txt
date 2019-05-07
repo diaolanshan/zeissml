@@ -3,3 +3,5 @@ Flask-Login
 PyMySQL
 Flask-SQLAlchemy
 mysql-python
+scikit-learn==0.20
+category_encoders
