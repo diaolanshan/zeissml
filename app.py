@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'oiwihjmcwe02f2'
 app.register_blueprint(zeisslearning, url_prefix='/learning')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root1234@localhost:3306/zeissml'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@szhpc6287:3306/zeissml'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///zeissml.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy()
@@ -54,8 +54,7 @@ def login():
             return redirect(next_url or url_for('learning.prediction'))
         else:
             flash('用户名或者密码错误')
-
-    return render_template('prediction.html')
+            return render_template('login.html')
 
 
 @app.route('/logout')

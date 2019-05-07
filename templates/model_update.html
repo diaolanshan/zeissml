@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <!--<link rel="stylesheet" type="text/css" href="../static/css/form.min.css">-->
-    <link rel="stylesheet" type="text/css" href="../static/css/semantic.css">
-</head>
-<body>
-<form class="ui fluid form segment error error" action="./model_update" method="post">
-    {% for message in get_flashed_messages() %}
-            <font color="red">{{ message }}</font>
-        {% endfor %}
+{% extends "layout.html" %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+
+{% block title %}数据录入{% endblock %}
+{% block body %}
+<form class="ui fluid form segment" action="./model_update" method="post">
     <div class="ui two column stackable grid container">
         <div class="column">
             <div class="field column">
@@ -23,116 +18,128 @@
                 <label class="">性别:</label>
                 <select name="gender" class="ui dropdown">
                     <option value="">性别</option>
-                    <option value="1">男</option>
-                    <option value="0">女</option>
-                    <option value="0">Gay</option>
-                    <option value="0">Lesbian</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
                 </select>
             </div>
-        </div>
+    </div>
 
     </div>
     <div class="two fields ui two column doubling stackable grid container">
         <div class="field column">
             <label>学历:</label>
             <select class="ui dropdown" name="education">
-                <option value="4">博士</option>
-                <option value="3">硕士</option>
-                <option value="2">本科</option>
-                <option value="1">高中</option>
-                <option value="0">初中及以下</option>
+                <option value="博士">博士</option>
+                <option value="硕士">硕士</option>
+                <option value="本科">本科</option>
+                <option value="高中">高中</option>
+                <option value="初中">初中及以下</option>
             </select>
         </div>
         <div class="field column">
             <label>对Zeiss的了解程度:</label>
-            <select class="ui dropdown" name="education">
-                <option value="2">高</option>
-                <option value="1">中</option>
-                <option value="0">低</option>
+            <select class="ui dropdown" name="knowhow">
+                <option value="高">高</option>
+                <option value="中">中</option>
+                <option value="低">低</option>
             </select>
         </div>
     </div>
     <div class="two fields ui two column doubling stackable grid container">
         <div class="field column">
             <label>是否有医保:</label>
-            <select class="ui dropdown" name="">
-                <option value="0">否</option>
-                <option value="1">有</option>
+            <select class="ui dropdown" name="yibao">
+                <option value="否">否</option>
+                <option value="有">有</option>
             </select>
         </div>
         <div class="field column">
             <label>手术医院资质:</label>
-            <select class="ui dropdown" name="">
-                <option value="0">一甲</option>
-                <option value="1">二甲</option>
-                <option value="1">三甲</option>
+            <select class="ui dropdown" name="hospital_level">
+                <option value="一甲">一甲</option>
+                <option value="二甲">二甲</option>
+                <option value="三甲">三甲</option>
             </select>
         </div>
     </div>
     <div class="two fields ui two column doubling stackable grid container">
         <div class="field column">
             <label>是否有认识的人有成功手术案例:</label>
-            <select class="ui dropdown" name="">
-                <option value="0">没有</option>
-                <option value="1">有</option>
+            <select class="ui dropdown" name="experience">
+                <option value="没有">没有</option>
+                <option value="有">有</option>
             </select>
         </div>
         <div class="field column">
             <label>是否近视:</label>
-            <select class="ui dropdown" name="">
-                <option value="0">近视</option>
-                <option value="1">不近视</option>
+            <select class="ui dropdown" name="jinshi">
+                <option value="是">近视</option>
+                <option value="否">不近视</option>
             </select>
         </div>
     </div>
     <div class="two fields ui two column doubling stackable grid container">
         <div class="field column">
             <label>家庭年收入（万）:</label>
-            <input name="incoming" type="text" value="">
+            <input name="incoming" type="text">
         </div>
         <div class="field column">
             <label>是否酗烟酒:</label>
-            <select class="ui dropdown" name="">
-                <option value="1">是</option>
-                <option value="0">否</option>
+            <select class="ui dropdown" name="drink_smoke">
+                <option value="是">是</option>
+                <option value="否">否</option>
+            </select>
+        </div>
+    </div>
+      <div class="one fields ui one column doubling stackable grid container">
+        <div class="field column">
+            <label>最终是否购买我们的服务？</label>
+            <select class="ui dropdown" name="decision">
+                <option value="是">是</option>
+                <option value="否">否</option>
             </select>
         </div>
     </div>
     <div class="one fields ui column doubling stackable grid container">
         <button type="submit" class="ui violet inverted button" style="width: 100%" value="Submit">Submit</button>
     </div>
+    </div>
 </form>
-<script src="../static/js/jquery-3.1.1.min.js"></script>
-<script src="../static/js/form.min.js"></script>
-<script src="../static/js/semantic.js"></script>
 <script type="text/javascript">
     $('.dropdown').dropdown();
-    $(document).ready(function() {
-        $('.ui.form').form({
-            inline: true,
-            on: 'blur',
-            fields: {
-              age: {
-                identifier  : 'age',
-                rules: [
-                  {
-                    type   : 'integer[1..120]',
-                    prompt : '请输入一个整数'
-                  }
-                ]
-              },
-              incoming: {
-                identifier  : 'incoming',
-                rules: [
-                  {
-                    type   : 'empty',
-                    prompt : '请输入一个整数'
-                  }
-                ]
+    $('.ui.form')
+      .form({
+        inline: true,
+        on: 'blur',
+        fields: {
+          integer: {
+            identifier  : 'age',
+            rules: [
+              {
+                type   : 'integer[1..120]',
+                prompt : 'Please enter your age'
               }
-            }
-          })
-     });
+            ]
+          },
+          incoming: {
+            identifier  : 'incoming',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your yearly in-coming'
+              }
+            ]
+          },
+          gender: {
+            identifier  : 'gender',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your gender'
+              }
+            ]
+          }
+        }
+      })
 </script>
-</body>
-</html>
+{% endblock %}
