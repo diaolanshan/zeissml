@@ -23,3 +23,12 @@ class Predict():
         self.model_file.predict(dt_pred)
         self.model_file.predict_proba(dt_pred)
         return [self.model_file.predict(dt_pred), self.model_file.predict_proba(dt_pred)]
+
+class PredictFactory():
+    predict = Predict()
+
+    def get_predict(self):
+        return self.__class__.predict
+
+    def update_predict(self):
+        self.__class__.predict = Predict()

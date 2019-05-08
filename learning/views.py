@@ -1,11 +1,12 @@
 import flask_login
 from flask import request, render_template
 from . import learning
-from learning.model_pred import Predict
+from learning.model_pred import PredictFactory
 from decimal import *
+from services.update_model_excel import update_model_excel
+from learning.main import train_model
 
-predict = Predict()
-
+factory = PredictFactory()
 
 @learning.route('/model_update', methods=['GET', 'POST'])
 @flask_login.login_required
@@ -24,6 +25,18 @@ def model_update():
         incoming = request.form['incoming']
         drink_smoke = request.form['drink_smoke']
         decision = request.form['decision']
+
+        new_row = (age, gender, education, knowhow, yibao, hospital_level, experience, jinshi, incoming, drink_smoke, decision)
+
+        new_rows = [new_row for i in range(1)]
+
+        update_model_excel(new_rows)
+
+        train_model()
+
+        factory.update_predict()
+
+    return render_template('/index.html')
 
 @learning.route('/prediction', methods=['GET', 'POST'])
 @flask_login.login_required
@@ -44,7 +57,7 @@ def prediction():
 
         # v_l = [50, '男', '本科', '高', '有', '三甲', '有', '否', 1, '否']
         data = [int(age), gender, education, knowhow, yibao, hospital_level, experience, jinshi, incoming, drink_smoke]
-        result = predict.pred_func(data)
+        result = factory.get_predict().pred_func(data)
         value = Decimal(result[1][0][1] * 100).quantize(Decimal('0.0'))
         return render_template('/prediction_result.html', result=value)
 
