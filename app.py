@@ -13,6 +13,7 @@ app.register_blueprint(zeisslearning, url_prefix='/learning')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@szhpc6287:3306/zeissml'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///zeissml.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.config['SQLALCHEMY_POOL_SIZE'] = 20
 db = SQLAlchemy()
 db.init_app(app)
 

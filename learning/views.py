@@ -5,8 +5,10 @@ from learning.model_pred import PredictFactory
 from decimal import *
 from services.update_model_excel import update_model_excel
 from learning.main import train_model
+import threading
 
 factory = PredictFactory()
+
 
 @learning.route('/model_update', methods=['GET', 'POST'])
 @flask_login.login_required
@@ -26,17 +28,23 @@ def model_update():
         drink_smoke = request.form['drink_smoke']
         decision = request.form['decision']
 
-        new_row = (age, gender, education, knowhow, yibao, hospital_level, experience, jinshi, incoming, drink_smoke, decision)
+        new_row = (
+        age, gender, education, knowhow, yibao, hospital_level, experience, jinshi, incoming, drink_smoke, decision)
 
         new_rows = [new_row for i in range(1)]
 
         update_model_excel(new_rows)
 
-        train_model()
-
-        factory.update_predict()
+        threading.Thread(target=dirty_tasks, args=()).start()
 
     return render_template('/index.html')
+
+
+def dirty_tasks():
+    train_model()
+
+    factory.update_predict()
+
 
 @learning.route('/prediction', methods=['GET', 'POST'])
 @flask_login.login_required
