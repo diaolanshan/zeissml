@@ -10,7 +10,7 @@ app = Flask(__name__, template_folder='templates')
 app.config['SECRET_KEY'] = 'oiwihjmcwe02f2'
 app.register_blueprint(zeisslearning, url_prefix='/learning')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:106.14.187.169@106.14.187.169:3306/zeissml'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:lyy110619.cn@106.14.187.169:3306/zeissml'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///zeissml.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_POOL_SIZE'] = 20
