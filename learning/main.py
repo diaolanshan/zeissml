@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 
 
 def train_model():
-    data_dir = ".\model"
-    data_file = os.path.join(data_dir, "三焦点项目数据V1.0.xlsx")
+    data_dir = "./model"
+    data_file = os.path.join(data_dir, "base_dataV1.0.xlsx")
 
     dt = pd.read_excel(data_file, sheetname='Sheet2').replace({'无': '否'})
 
@@ -90,7 +90,7 @@ def train_model():
 
     import pickle
 
-    filehandler = open(b".\\model\\pipe_model.pkl", "wb")
+    filehandler = open(b"./model/pipe_model.pkl", "wb")
     pickle.dump(pipe, filehandler)
     filehandler.close()
     print('-------------------------Model train finished.---------------------------------')

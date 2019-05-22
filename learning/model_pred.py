@@ -4,7 +4,7 @@ import pandas as pd
 
 class Predict():
     def __init__(self):
-        file = open(b".\\model\\pipe_model.pkl", 'rb')
+        file = open(b"./model/pipe_model.pkl", 'rb')
         self.model_file = pickle.load(file)
         file.close()
         print('Model loaded.')
