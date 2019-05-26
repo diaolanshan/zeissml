@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, url_for, flash
 from flask import request
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.exc import InvalidRequestError
 
 from learning import learning as zeisslearning
 
@@ -47,15 +48,18 @@ def login():
 
         next_url = request.args.get("next")
         from models.models import Users
-        user = Users.query.filter_by(username=username).first()
+        try:
+            user = Users.query.filter_by(username=username).first()
 
-        if user is not None and user.password == password.strip():
-            # set login user
-            flask_login.login_user(user)
-            return redirect(next_url or url_for('learning.prediction'))
-        else:
-            flash('用户名或者密码错误')
-            return render_template('login.html')
+            if user is not None and user.password == password.strip():
+                # set login user
+                flask_login.login_user(user)
+                return redirect(next_url or url_for('learning.prediction'))
+            else:
+                flash('用户名或者密码错误')
+                return render_template('login.html')
+        except InvalidRequestError as e:
+            db.session.rollback()
 
 
 @app.route('/logout')
